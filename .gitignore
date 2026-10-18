@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.aux
+*.log
+*.out
+*.toc
+data/processed/*
+!data/processed/.gitkeep
+*.pkl
+*.joblib
+*.parquet
+*.zip

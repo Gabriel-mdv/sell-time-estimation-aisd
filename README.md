@@ -35,12 +35,23 @@ The dataset contains historical farmgate price observations for agricultural pro
 | `channel` | Market channel for the reported price, such as farmgate. |
 | `location` | Name of the market location. |
 | `region` | District or wider region containing the location. |
-| `price` | Observed selling price in RWF per unit. |
 | `currency` | Currency of the price, expected to be RWF. |
 | `source` | Organisation identified as the source of the observation. |
 | `scraped_at` | Timestamp when the record was collected from the source. |
+| `price` | Observed selling price in RWF per unit. |
 
-The model combines `region` and `location` to identify a market, uses `observed_date` to build historical price features, and predicts a future value of `price`. The `scraped_at` field is retained for provenance and availability checks, not used as a prediction feature.
+The `price` column is the target feature: the model predicts its future value for each crop and market.
+
+### Example records
+
+The table below shows four observations in a simplified form. Each row is one reported crop price at a particular market and date.
+
+| Observed date | Product | Market location | Region | Price (RWF/kg) |
+| --- | --- | --- | --- | ---: |
+| 2026-10-14 | Tomato | Kirambo | BURERA | 833.00 |
+| 2026-10-14 | Tomato | Kibuye | KARONGI | 800.00 |
+| 2026-10-14 | Tomato | Nyagahinga | BURERA | 600.00 |
+| 2026-10-13 | Tomato | Birambo | KARONGI | 567.00 |
 
 The initial audit covers tomatoes and carrots. Cabbage, red onions and Irish potato Kinigi Grade 2 are planned extensions, subject to historical data availability and quality.
 

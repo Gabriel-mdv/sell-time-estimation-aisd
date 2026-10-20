@@ -23,7 +23,24 @@ Training targets will come from observed market prices. Storage losses will be r
 
 ## Dataset
 
-Price records are obtained from [TangaBid](https://tangabid.com/data-access/), with **Esoko Rwanda** identified in the source field. The available exports contain farmgate prices in RWF/kg.
+The dataset contains historical farmgate price observations for agricultural products sold in Rwandan markets. Each row represents the reported price of one product at one market on one observation date. The current project includes tomato and carrot exports from [TangaBid](https://tangabid.com/data-access/), with **Esoko Rwanda** identified as the source. Prices are recorded in Rwandan francs per kilogram (RWF/kg).
+
+| Column | Meaning |
+| --- | --- |
+| `observed_date` | Date on which the market price was observed. |
+| `product` | Crop/product name, such as Tomato or Carrot. |
+| `unit` | Measurement unit for the price, expected to be kilograms. |
+| `variety` | Crop variety; currently missing in the available exports. |
+| `grade` | Product quality grade; currently missing in the available exports. |
+| `channel` | Market channel for the reported price, such as farmgate. |
+| `location` | Name of the market location. |
+| `region` | District or wider region containing the location. |
+| `price` | Observed selling price in RWF per unit. |
+| `currency` | Currency of the price, expected to be RWF. |
+| `source` | Organisation identified as the source of the observation. |
+| `scraped_at` | Timestamp when the record was collected from the source. |
+
+The model combines `region` and `location` to identify a market, uses `observed_date` to build historical price features, and predicts a future value of `price`. The `scraped_at` field is retained for provenance and availability checks, not used as a prediction feature.
 
 The initial audit covers tomatoes and carrots. Cabbage, red onions and Irish potato Kinigi Grade 2 are planned extensions, subject to historical data availability and quality.
 
